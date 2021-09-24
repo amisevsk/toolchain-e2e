@@ -1,0 +1,28 @@
+kind: Template
+apiVersion: v1
+metadata:
+  name: nodejs-sample
+objects:
+  - apiVersion: workspace.devfile.io/v1alpha2
+    kind: DevWorkspace
+    metadata:
+      annotations:
+        controller.devfile.io/restricted-access: "true"
+      labels:
+        console.openshift.io/terminal: "true"
+      name: terminal-temp
+    spec:
+      routingClass: web-terminal
+      started: false
+      template:
+        components:
+        - name: web-terminal-tooling
+          plugin:
+            kubernetes:
+              name: web-terminal-tooling
+              namespace: openshift-operators
+        - name: web-terminal-exec
+          plugin:
+            kubernetes:
+              name: web-terminal-exec
+              namespace: openshift-operators
